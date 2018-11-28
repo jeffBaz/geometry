@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Line, Point } from '../models/models';
 
 @Component({
@@ -15,15 +15,21 @@ export class CanvasComponent implements OnInit {
   ngOnInit() {
     this.lines = [];
     this.points = [];
-    for (let i = 0; i < 20; i++) {
+    const center = new Point(Math.random() * 200, Math.random() * 200);
+    const r = 200;
+    for (let i = 0; i < 360; i++) {
       const line = new Line();
-      line.p1 = new Point(Math.random() * 200, Math.random() * 200);
-      line.p2 = new Point(Math.random() * 200, Math.random() * 200);
-      const  point = new Point(Math.random() * 200, Math.random() * 200);
+      line.p1 = new Point(r * Math.cos(i), r * Math.cos(i - r));
+      line.p2 = new Point(r * Math.cos(i), r * Math.cos(i - r));
+      const point = new Point(i, r * Math.cos(i));
       this.lines.push(line);
       this.points.push(point);
     }
 
+  }
+  @HostListener('document:mousemove', ['$event'])
+  mouseHandler(e) {
+    console.info(e);
   }
 
 }

@@ -1,2 +1,4 @@
-<app-line *ngFor="let line of lines" [line]="line"></app-line>
-<!--app-point *ngFor="let point of points" [ref]="point"></app-point-->
+<div class="canvasContainer">
+  <app-line *ngFor="let line of lines" [line]="line"></app-line>
+  <app-point *ngFor="let point of points" [ref]="point"></app-point>
+</div>
